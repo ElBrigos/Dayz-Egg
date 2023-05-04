@@ -13,10 +13,10 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: Set up Docker Buildx
+    - name: Build and Push Docker Image
       uses: mr-smithers-excellent/docker-build-push@v6
       with:
-        image: dayz-server-windows
+        image: ${{ github.repository_owner }}/dayz-server-windows
         registry: ghcr.io
         username: ${{ github.repository_owner }}
         password: ${{ secrets.GITHUB_TOKEN }}
