@@ -1,5 +1,5 @@
-# Utilisez l'image de base Windows Server Core
-FROM mcr.microsoft.com/windows/servercore:ltsc2019
+# Utilisez l'image de base Windows avec support graphique
+FROM mcr.microsoft.com/windows:20H2
 
 # Installer Chocolatey, un gestionnaire de paquets pour Windows
 RUN powershell.exe -Command \
@@ -8,11 +8,8 @@ RUN powershell.exe -Command \
     iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && \
     choco feature enable -n allowGlobalConfirmation
 
-# Installez les dépendances: Git, 7-Zip et Wine
-RUN choco install git 7zip.install wine
-
-# Ajouter le répertoire de Wine aux variables d'environnement
-ENV WINEPATH="C:\\Program Files\\Wine\\stable\\bin;%PATH%"
+# Installez les dépendances: Git et 7-Zip
+RUN choco install git 7zip.install
 
 # Récupérer et décompresser le serveur SteamCMD
 RUN powershell.exe -Command \
@@ -26,5 +23,5 @@ RUN C:/steamcmd/steamcmd.exe +login anonymous +force_install_dir C:/dayz +app_up
 # Exposer les ports nécessaires pour le serveur DayZ Standalone (2302 pour le jeu, 27016 pour Steam)
 EXPOSE 2302/udp 27016/udp
 
-# Lancer le serveur DayZ Standalone avec Wine
-CMD wine C:/dayz/DayZServer_x64.exe -config=serverDZ.cfg -port=2302
+# Lancer le serveur DayZ Standalone
+CMD C:/dayz/DayZServer_x64.exe -config=serverDZ.cfg -port=2302
