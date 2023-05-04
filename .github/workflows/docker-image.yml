@@ -29,4 +29,4 @@ jobs:
         context: .
         platforms: windows/amd64
         push: true
-        tags: elbrigos/dayz-server-windows:latest
+        tags: ghcr.io/elbrigos/dayz-server-windows:latest
