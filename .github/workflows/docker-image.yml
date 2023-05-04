@@ -16,7 +16,7 @@ jobs:
     - name: Set up Docker Buildx
       uses: mr-smithers-excellent/docker-build-push@v5
       with:
-        image: my_awesome_microservice
+        image: dayz-server-windows
         registry: ghcr.io
         username: ${{ github.repository_owner }}
         password: ${{ secrets.GITHUB_TOKEN }}
