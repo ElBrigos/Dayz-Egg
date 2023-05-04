@@ -21,4 +21,4 @@ jobs:
         username: ${{ github.repository_owner }}
         password: ${{ secrets.GITHUB_TOKEN }}
         platform: windows/amd64
-        tags: ghcr.io/elbrigos/dayz-server-windows:latest
+        tags: latest
